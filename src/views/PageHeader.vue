@@ -4,7 +4,7 @@
       <Logo />
       <a
         id="github-link"
-        href="https://github.io"
+        href="https://github.com/wave-charts/avatar-gen/"
         target="_blank"
         class="__cursor_rect"
       >
