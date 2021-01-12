@@ -254,6 +254,7 @@ export const avatarConfig: Record<LayerType, LayerConfig[]> = {
     {
       id: "qy01",
       weight: 5,
+      congratulate: true,
     },
   ],
 
@@ -289,6 +290,13 @@ export const avatarConfig: Record<LayerType, LayerConfig[]> = {
       id: 3,
       weight: 1,
       colorLib: colorLib.shirt,
+    },
+  ],
+
+  Mask: [
+    {
+      id: "Empty",
+      weight: 1,
     },
   ],
 };

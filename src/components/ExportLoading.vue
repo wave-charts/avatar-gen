@@ -37,8 +37,7 @@ export default class ExportLoading extends Vue {
 
 <style lang="scss" scoped>
 .export-loading {
-  background-color: rgba(255, 255, 255, 1);
-  backdrop-filter: saturate(180%) blur(20px);
+  /* background-color: rgba(255, 255, 255, 1); */
   position: fixed;
   z-index: 99;
   display: flex;
@@ -67,6 +66,15 @@ export default class ExportLoading extends Vue {
     align-items: center;
     color: grey;
     font-size: 0.7rem;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .export-loading {
+    /* background-color: #393939; */
+    .progress {
+      background-color: #787878;
+    }
   }
 }
 </style>

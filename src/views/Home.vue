@@ -1,48 +1,69 @@
 <template>
   <div id="avatar-creator">
     <div
-      id="avatar-preview"
       :style="{
-        width: `${width}px`,
+        width: `100%`,
         height: `${height}px`,
-        backgroundColor,
-        borderRadius,
+        display: 'flex',
+        justifyContent: 'center',
       }"
     >
-      <section
-        v-for="(layer, index) in layers"
-        :key="index"
+      <div
         :style="{
-          position: 'absolute',
-          left: 0,
-          top: 0,
+          overflow: 'hidden',
           width: `${width}px`,
-          height: `${height}px`,
-          zIndex: layer.zIndex,
-          opacity: layer.hide ? 0 : 1,
+          height: exporting ? 0 : `${height}px`,
         }"
       >
-        <component
-          :is="layer.name"
-          :fill="layer.fill"
-          :width="width"
-          :height="height"
+        <div
+          id="avatar-preview"
           :style="{
             width: `${width}px`,
             height: `${height}px`,
+            backgroundColor,
+            borderRadius,
           }"
-        />
-      </section>
+        >
+          <section
+            v-for="(layer, index) in layers"
+            :key="index"
+            :style="{
+              position: 'absolute',
+              left: 0,
+              top: 0,
+              width: `${width}px`,
+              height: `${height}px`,
+              zIndex: layer.zIndex,
+              opacity: layer.hide ? 0 : 1,
+            }"
+          >
+            <component
+              :is="layer.name"
+              :fill="layer.fill"
+              :width="width"
+              :height="height"
+              :style="{
+                width: `${width}px`,
+                height: `${height}px`,
+              }"
+            />
+          </section>
 
-      <ExportLoading
-        :ammount="ammount"
-        :progress="progress"
-        v-if="showMask"
-        :style="{
-          width: `${width}px`,
-          height: `${height}px`,
-        }"
-      />
+          <ExportLoading
+            :ammount="
+              Object.prototype.toString.call(ammount) === '[object String]'
+                ? parseInt(ammount)
+                : ammount
+            "
+            :progress="progress"
+            v-if="showMask"
+            :style="{
+              width: `${width}px`,
+              height: `${height}px`,
+            }"
+          />
+        </div>
+      </div>
     </div>
 
     <div class="btns" style="margin-top: 40px;">
@@ -50,7 +71,7 @@
       <button
         id="refresh-btn"
         :disabled="exporting ? 'disabled' : false"
-        @click="createAvatar"
+        @click="() => createAvatar()"
         class="__cursor_rect"
       >
         <i class="ri-refresh-line"></i>
@@ -111,6 +132,7 @@ import html2canvas from "html2canvas";
 import { avatarZIndex, avatarConfig, colorLib } from "./avatar.config";
 import { Layer, LayerType, LayerConfig } from "@/views/avatar.type";
 import JSZip from "jszip";
+import confetti from "canvas-confetti";
 
 // 批量处理
 const requireContext = require.context(
@@ -153,13 +175,13 @@ export default class AvatarCreator extends Vue {
   private borderRadius = "50%";
 
   mounted() {
-    this.createAvatar();
+    this.createAvatar(true);
   }
 
   /**
    * 生成头像
    */
-  private createAvatar() {
+  private createAvatar(isInit = false) {
     const layerTypes: LayerType[] = [
       "Base",
       "Ear",
@@ -172,6 +194,7 @@ export default class AvatarCreator extends Vue {
       "Mouth",
       "Nose",
       "Shirt",
+      "Mask",
     ];
     this.layers.splice(0);
     for (let i = 0; i < layerTypes.length; i++) {
@@ -221,7 +244,6 @@ export default class AvatarCreator extends Vue {
 
       // 处理隐藏
       if (layer.config && layer.config.hide) {
-        const hideLayerTypeArr: LayerType[] = layer.config.hide;
         layer.config.hide.forEach((type: LayerType) => {
           const targetLayer = this.layers.find(
             (l: Layer) => l.layerType === type
@@ -247,6 +269,10 @@ export default class AvatarCreator extends Vue {
         .every((layer: Layer) => layer.fill !== this.backgroundColor);
       if (noConflict) loop = false;
     }
+
+    const congratulate = this.layers.some(({ config }) => config.congratulate);
+
+    if (!isInit && congratulate) this.applyConfettiAnimation();
   }
 
   /**
@@ -275,47 +301,51 @@ export default class AvatarCreator extends Vue {
   }
 
   async superMake() {
-    this.exporting = true;
-    this.showMask = true;
-    let { ammount } = this;
-    const max = 10000;
-    ammount = ammount > max ? max : ammount < 0 ? 1 : ammount;
-    this.ammount = ammount;
-    this.progress = 0;
+    this.$emit("multiple-start");
+    setTimeout(() => {
+      this.exporting = true;
+      this.showMask = true;
+      let { ammount } = this;
+      const max = 10000;
+      ammount = ammount > max ? max : ammount < 0 ? 1 : ammount;
+      this.ammount = ammount;
+      this.progress = 0;
 
-    const zip = new JSZip();
-    this.borderRadius = "0";
+      const zip = new JSZip();
+      this.borderRadius = "0";
 
-    this.$nextTick(async () => {
-      for (let i = 0; i < ammount; i++) {
-        this.createAvatar();
-        const dom: HTMLElement = document.querySelector(
-          "#avatar-preview"
-        ) as HTMLElement;
+      this.$nextTick(async () => {
+        for (let i = 0; i < ammount; i++) {
+          this.createAvatar(true);
+          const dom: HTMLElement = document.querySelector(
+            "#avatar-preview"
+          ) as HTMLElement;
 
-        const canvas = await html2canvas(dom, {
-          logging: false,
-          scale: window.devicePixelRatio * 2,
-          width: this.width,
-          height: this.height,
-          ignoreElements: this.exportIgnoreMiddleware as any,
-        });
+          const canvas = await html2canvas(dom, {
+            logging: false,
+            scale: window.devicePixelRatio * 2,
+            width: this.width,
+            height: this.height,
+            ignoreElements: this.exportIgnoreMiddleware as any,
+          });
 
-        const dataUrl = canvas
-          .toDataURL()
-          .replace("data:image/png;base64,", "");
-        zip.file(`${i}.png`, dataUrl, { base64: true });
-        this.progress = i + 1;
-      }
-      const base64 = await zip.generateAsync({ type: "base64" });
-      const a = document.createElement("a");
-      a.href = "data:application/zip;base64," + base64;
-      a.download = "avatar.zip";
-      a.click();
-      this.exporting = false;
-      this.borderRadius = "50%";
-      this.showMask = false;
-    });
+          const dataUrl = canvas
+            .toDataURL()
+            .replace("data:image/png;base64,", "");
+          zip.file(`${i + 1}.png`, dataUrl, { base64: true });
+          this.progress = i + 1;
+        }
+        const base64 = await zip.generateAsync({ type: "base64" });
+        const a = document.createElement("a");
+        a.href = "data:application/zip;base64," + base64;
+        a.download = "avatar.zip";
+        a.click();
+        this.exporting = false;
+        this.$emit("multiple-end");
+        this.borderRadius = "50%";
+        this.showMask = false;
+      });
+    }, 0);
   }
 
   /**
@@ -357,6 +387,75 @@ export default class AvatarCreator extends Vue {
     }
     return false;
   }
+
+  /**
+   * 绘制动画
+   */
+  private applyConfettiAnimation() {
+    const btn = document.querySelector("#refresh-btn");
+    const rect = btn.getBoundingClientRect();
+    const { clientWidth, clientHeight } = document.body;
+    const centerOfBtnX = rect.left + rect.width / 2;
+    const centerOfBtnY = rect.top + rect.height / 2;
+    const centerOfBtnXPercent = centerOfBtnX / clientWidth;
+    const centerOfBtnYPercent = centerOfBtnY / clientHeight;
+
+    const _confetti = function(opt = {}) {
+      confetti({
+        particleCount: Math.floor(100 + Math.random() * 100),
+        angle: 80,
+        spread: 155, // 最大角度
+        startVelocity: 50, // 最大距离
+        decay: 0.9, // 减速： [0, 1]
+        gravity: 3,
+        ticks: 200, // 移动次数
+        origin: {
+          x: centerOfBtnXPercent,
+          y: centerOfBtnYPercent,
+        },
+        colors: [
+          "#F4D03F",
+          "#E20650",
+          "#1F618D",
+          "#3498DB",
+          "#E74C3C",
+          "#48C9B0",
+          "#34495E",
+          "#31FBE0",
+        ],
+        shapes: ["square"],
+        scalar: 1,
+        zIndex: clientWidth > 400 ? 0 : 100,
+
+        ...opt,
+      });
+    };
+    _confetti({
+      scalar: 1.4,
+    });
+    _confetti({
+      particleCount: 50,
+      // angle: 80,
+      spread: 65, // 最大角度
+      startVelocity: 60, // 最大距离
+      gravity: 2,
+    });
+    _confetti({
+      particleCount: 20,
+      angle: 80,
+      spread: 45,
+      startVelocity: 40,
+      colors: [
+        "#7b5cff",
+        "#6245e0",
+        "#b3c7ff",
+        "#8fa5e5",
+        "#5c86ff",
+        "#345dd1",
+      ],
+      scalar: 1.2,
+    });
+  }
 }
 </script>
 
@@ -373,11 +472,14 @@ $primary: #0067b6;
   align-items: stretch;
   justify-content: center;
 
-  background-color: #fff;
+  /* background-color: #fff; */
+  background-color: rgba(255, 255, 255, 0.7);
   border-radius: 12px;
   padding: 50px 30px 20px 30px;
   box-shadow: 12px 20px 40px rgba(0, 0, 0, 0.1),
     5px 5px 10px rgba(0, 0, 0, 0.02);
+  z-index: 9;
+  backdrop-filter: saturate(180%) blur(12px);
 
   .btns {
     display: flex;
@@ -495,6 +597,32 @@ $primary: #0067b6;
     width: 100%;
     height: 100%;
     border-radius: 0;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  #avatar-creator {
+    /* background-color: #393939; */
+    background-color: rgba(80, 80, 80, 0.2);
+
+    input {
+      background-color: #555;
+      color: #eee;
+    }
+
+    button#multiple-export-btn {
+      color: #fff;
+      background-color: rgba($primary, 1);
+      &:hover {
+        background-color: rgba($primary, 0.8);
+        color: #ccc;
+      }
+    }
+
+    button:disabled {
+      background-color: #686868 !important;
+      color: grey !important;
+    }
   }
 }
 </style>

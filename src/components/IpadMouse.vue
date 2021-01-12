@@ -4,6 +4,7 @@
     ref="cursor"
     :class="{
       focus,
+      'force-show-cursor': forceShowCursor,
     }"
   >
     <div class="cursor-content"></div>
@@ -20,11 +21,17 @@ export default {
     textSelector: {
       default: ".cj-cusor-text",
     },
+
+    forceShowCursor: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   data() {
     return {
       focus: false,
+      styleTag: undefined,
     };
   },
 
@@ -39,11 +46,20 @@ export default {
       this.generateIpadMouse();
     });
   },
+
+  watch: {
+    forceShowCursor(show) {
+      if (show) this.showDefaultCursor();
+      else this.removeDefaultCursor();
+    }
+  },
+  
   methods: {
     generateIpadMouse() {
       this.initCursor();
       this.initRect();
       this.initText();
+      this.removeDefaultCursor();
     },
 
     initCursor() {
@@ -173,16 +189,39 @@ export default {
         );
       });
     },
+
+    removeDefaultCursor() {
+      this.clearStyleTag();
+      const styleTag = document.createElement("style");
+      styleTag.appendChild(
+        document.createTextNode(`
+        body,*
+        {
+          cursor: none !important;  
+        }`)
+      );
+      document.head.appendChild(styleTag);
+      this.styleTag = styleTag;
+    },
+
+    showDefaultCursor() {
+      this.clearStyleTag();
+    },
+
+    clearStyleTag() {
+      if (this.styleTag) {
+        try {
+          document.head.removeChild(this.styleTag);
+        } catch (err) {
+          console.log("error to clear style tag");
+        }
+      }
+    },
   },
 };
 </script>
 
 <style lang="scss">
-body,
-* {
-  cursor: none !important;
-}
-
 #ipad-mouse-cursor {
   --width: 20px;
   --height: 20px;
@@ -226,6 +265,14 @@ body,
     top: 0;
     transform: translate(var(--translateX), var(--translateY));
     transition-property: "opacity";
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  #ipad-mouse-cursor {
+    & .cursor-content {
+      background-color: #fff;
+    }
   }
 }
 </style>

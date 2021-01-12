@@ -27,11 +27,11 @@ export default {
 <style lang="scss">
 #page-header {
   width: 100%;
-  height: 50px;
-  background-color: rgba(255, 255, 255, 0.8);
+  height: 60px;
+  background-color: rgba(255, 255, 255, 0.5);
   backdrop-filter: saturate(180%) blur(14px);
   position: absolute;
-  z-index: 10;
+  z-index: 200;
   top: 0;
   left: 0;
 
@@ -60,6 +60,17 @@ export default {
       padding: 0 10px;
       &:hover {
         /* background-color: #f6f6f6; */
+      }
+    }
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  #page-header {
+    background-color: rgba(0, 0, 0, 0.1);
+    .display {
+      a {
+        color: #eee;
       }
     }
   }

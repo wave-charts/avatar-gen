@@ -1,6 +1,8 @@
 <template>
   <footer id="page-footer">
-    <a class="__cursor_text"> 由 <strong>高下制图</strong> 提供 </a>
+    <a href="http://beian.miit.gov.cn/" target="_blank" class="__cursor_text">
+      浙ICP备19023396号-3 &nbsp; &copy;2020 高下制图
+    </a>
   </footer>
 </template>
 
@@ -14,6 +16,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 99;
 
   a {
     font-size: 0.7rem;

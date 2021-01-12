@@ -1,5 +1,3 @@
-import { LayerType } from "./avatar.d";
-import { LayerType } from "./avatar.type";
 /**
  * 可用图层类型
  */
@@ -14,7 +12,8 @@ export type LayerType =
   | "Hair"
   | "Mouth"
   | "Nose"
-  | "Shirt";
+  | "Shirt"
+  | "Mask";
 
 export interface Color {
   weight: number;
@@ -27,6 +26,7 @@ export interface LayerConfig {
   colorLib?: Color[]; // 设置可用颜色
   colorRefer?: LayerType; // 设置颜色跟随
   hide?: LayerType[]; // 指定需要隐藏的图层
+  congratulate?: Boolean; // 是否显示彩蛋
 }
 
 export interface Layer {
