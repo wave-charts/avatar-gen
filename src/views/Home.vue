@@ -96,7 +96,7 @@
         href="https://www.figma.com/community/file/829741575478342595/Avatar-Illustration-System"
         target="_blank"
       >
-        Fiama 社区
+        Figma 社区
       </a>
     </div>
   </div>
