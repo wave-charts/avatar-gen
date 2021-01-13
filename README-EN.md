@@ -12,7 +12,7 @@ Live demo: [https://avatar.gaoxiazhitu.com](https://avatar.gaoxiazhitu.com)
 
 Preview: 
 
-![](./assets/doc/mobile-preview.gif)
+![](./assets/doc/mobile-preview-en.gif)
 
 ## Run
 
