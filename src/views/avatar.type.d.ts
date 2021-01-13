@@ -13,7 +13,8 @@ export type LayerType =
   | "Mouth"
   | "Nose"
   | "Shirt"
-  | "Mask";
+  | "Mask"
+  | "Hat";
 
 export interface Color {
   weight: number;

@@ -293,10 +293,19 @@ export const avatarConfig: Record<LayerType, LayerConfig[]> = {
     },
   ],
 
+  // 面罩
   Mask: [
     {
       id: "Empty",
       weight: 1,
+    },
+  ],
+
+  // 帽子
+  Hat: [
+    {
+      id: "Empty",
+      weight: 50,
     },
   ],
 };

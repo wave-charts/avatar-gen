@@ -138,6 +138,8 @@ import html2canvas from "html2canvas";
 import { avatarZIndex, avatarConfig, colorLib } from "./avatar.config";
 import { Layer, LayerType, LayerConfig } from "@/views/avatar.type";
 import JSZip from "jszip";
+
+// @ts-ignore
 import confetti from "canvas-confetti";
 
 // 批量处理
@@ -201,6 +203,7 @@ export default class AvatarCreator extends Vue {
       "Nose",
       "Shirt",
       "Mask",
+      "Hat",
     ];
     this.layers.splice(0);
     for (let i = 0; i < layerTypes.length; i++) {
@@ -262,6 +265,7 @@ export default class AvatarCreator extends Vue {
     // 设置背景颜色
     let loop = true;
     while (loop) {
+      // 处理背景颜色和头发的冲突
       this.backgroundColor = this.randomSelectWithWeight(
         "1",
         colorLib.background,
@@ -276,7 +280,9 @@ export default class AvatarCreator extends Vue {
       if (noConflict) loop = false;
     }
 
-    const congratulate = this.layers.some(({ config }) => config.congratulate);
+    const congratulate = this.layers.some(
+      ({ config }) => config && config.congratulate
+    );
 
     if (!disableConfetti && congratulate) this.applyConfettiAnimation();
   }
@@ -399,6 +405,7 @@ export default class AvatarCreator extends Vue {
    */
   private applyConfettiAnimation() {
     const btn = document.querySelector("#refresh-btn");
+    if (!btn) return;
     const rect = btn.getBoundingClientRect();
     const { clientWidth, clientHeight } = document.body;
     const centerOfBtnX = rect.left + rect.width / 2;
