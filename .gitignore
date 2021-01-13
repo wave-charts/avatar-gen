@@ -4,6 +4,7 @@ node_modules
 
 
 # local env files
+.env
 .env.local
 .env.*.local
 
@@ -21,4 +22,3 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
-node_modules

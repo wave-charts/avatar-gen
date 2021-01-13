@@ -75,7 +75,7 @@
         class="__cursor_rect"
       >
         <i class="ri-refresh-line"></i>
-        <span>换一个</span>
+        <span>{{ $t("random-avatar") }}</span>
       </button>
 
       <!-- 下载按钮 -->
@@ -86,7 +86,9 @@
         @click="capture"
       >
         <i class="ri-file-download-line"></i>
-        <span>下载</span>
+        <span>
+          {{ $t("download") }}
+        </span>
       </button>
     </div>
 
@@ -95,7 +97,7 @@
         v-model="ammount"
         type="number"
         class="sum-input __cursor_text"
-        placeholder="输入数量"
+        :placeholder="$t('input-amount-placeholder')"
         style="flex-grow: 1; margin-right: 10px;"
       />
       <button
@@ -106,18 +108,22 @@
         @click="superMake"
       >
         <i class="ri-file-zip-fill"></i>
-        <span>打包</span>
+        <span>
+          {{ $t("pack") }}
+        </span>
       </button>
     </div>
 
     <div class="resource-info">
-      <span class="__cursor_text">素材来源于</span>
+      <span class="__cursor_text">
+        {{ $t("resource-from") }}
+      </span>
       <a
         class="__cursor_rect"
         href="https://www.figma.com/community/file/829741575478342595/Avatar-Illustration-System"
         target="_blank"
       >
-        Figma 社区
+        {{ $t("figma-community") }}
       </a>
     </div>
   </div>
@@ -175,13 +181,13 @@ export default class AvatarCreator extends Vue {
   private borderRadius = "50%";
 
   mounted() {
-    this.createAvatar(true);
+    this.createAvatar();
   }
 
   /**
    * 生成头像
    */
-  private createAvatar(isInit = false) {
+  private createAvatar(disableConfetti = false) {
     const layerTypes: LayerType[] = [
       "Base",
       "Ear",
@@ -272,7 +278,7 @@ export default class AvatarCreator extends Vue {
 
     const congratulate = this.layers.some(({ config }) => config.congratulate);
 
-    if (!isInit && congratulate) this.applyConfettiAnimation();
+    if (!disableConfetti && congratulate) this.applyConfettiAnimation();
   }
 
   /**

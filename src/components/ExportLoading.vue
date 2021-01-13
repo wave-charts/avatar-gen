@@ -10,7 +10,7 @@
     </div>
 
     <div class="description">
-      <div class="div">正在导出: {{ percent }}</div>
+      <div class="div">{{ $t("export-loading-msg") }}: {{ percent }}</div>
       <div class="num">{{ progress }} / {{ ammount }}</div>
     </div>
   </div>

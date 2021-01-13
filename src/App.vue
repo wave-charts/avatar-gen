@@ -57,6 +57,13 @@ html {
   padding: 0;
 }
 
+a {
+  color: unset;
+  &:visited {
+    color: unset;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   body,
   html {

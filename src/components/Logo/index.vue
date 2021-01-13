@@ -1,6 +1,6 @@
 <template>
   <a
-    style="width: 80px; height: 36px; display: flex; justify-content: center; align-items: center; transition: all 0.15s ease;"
+    style="width: 100px; height: 50px; display: flex; justify-content: center; align-items: center; transition: all 0.15s ease;padding: 5px 10px;"
     class="__cursor_rect"
     href="https://gaoxiazhitu.com"
     target="_blank"
