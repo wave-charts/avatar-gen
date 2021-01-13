@@ -8,7 +8,11 @@
 
 A web platform to create random avatar,
 
-DEMO: [https://avatar.gaoxiazhitu.com](https://avatar.gaoxiazhitu.com)
+Live demo: [https://avatar.gaoxiazhitu.com](https://avatar.gaoxiazhitu.com)
+
+Preview: 
+
+![](./assets/doc/mobile-preview.gif)
 
 ## Run
 

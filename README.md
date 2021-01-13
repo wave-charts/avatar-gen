@@ -8,7 +8,11 @@
 
 一个纯前端实现的头像生成器，并且支持导出与批量下载的功能;
 
-DEMO: [https://avatar.gaoxiazhitu.com](https://avatar.gaoxiazhitu.com)
+在线演示： [https://avatar.gaoxiazhitu.com](https://avatar.gaoxiazhitu.com)
+
+预览：
+
+![](./assets/doc/mobile-preview.gif)
 
 ## 运行项目
 
