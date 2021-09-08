@@ -64,10 +64,24 @@ a {
   }
 }
 
+:root {
+  --highlight-bg: #fff;
+}
+
 @media (prefers-color-scheme: dark) {
   body,
   html {
-    background-color: #292929;
+    background-color: #333333;
+  }
+  :root {
+    --highlight-bg: #494949;
+  }
+}
+
+body.darkmode:not(.darkmode-off) {
+  background-color: #333333;
+  :root {
+    --highlight-bg: #494949;
   }
 }
 </style>

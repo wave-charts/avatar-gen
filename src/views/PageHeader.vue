@@ -3,6 +3,7 @@
     <div class="display">
       <Logo />
       <section class="pager-header-right-part">
+        <DarkmodeController />
         <div id="language-selector">
           <button class="__cursor_rect">
             <span>{{ $t("select-language") }}</span>
@@ -45,9 +46,11 @@
 
 <script>
 import Logo from "@/components/Logo";
+import DarkmodeController from "@/components/DarkmodeController";
 export default {
   components: {
     Logo,
+    DarkmodeController,
   },
   data() {
     return {
@@ -197,6 +200,27 @@ export default {
   #page-header {
     --highlight-color: #1583d6;
     background-color: rgba(0, 0, 0, 0.1);
+    .display {
+      .pager-header-right-part {
+        color: #eee;
+
+        #language-selector ul {
+          background-color: rgba(0, 0, 0, 0.1);
+          color: inherit;
+
+          &::after {
+            border-bottom: 8px solid rgba(0, 0, 0, 0.1);
+          }
+        }
+      }
+    }
+  }
+}
+
+body.darkmode:not(.darkmode-off) {
+  #page-header {
+    --highlight-color: #1583d6;
+    background-color: rgba(255, 255, 255, 0.035);
     .display {
       .pager-header-right-part {
         color: #eee;

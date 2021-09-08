@@ -51,9 +51,9 @@ export default {
     forceShowCursor(show) {
       if (show) this.showDefaultCursor();
       else this.removeDefaultCursor();
-    }
+    },
   },
-  
+
   methods: {
     generateIpadMouse() {
       this.initCursor();
@@ -269,6 +269,13 @@ export default {
 }
 
 @media (prefers-color-scheme: dark) {
+  #ipad-mouse-cursor {
+    & .cursor-content {
+      background-color: #fff;
+    }
+  }
+}
+body.darkmode:not(.darkmode-off) {
   #ipad-mouse-cursor {
     & .cursor-content {
       background-color: #fff;

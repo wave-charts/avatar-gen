@@ -77,4 +77,13 @@ export default class ExportLoading extends Vue {
     }
   }
 }
+
+body.darkmode:not(.darkmode-off) {
+  .export-loading {
+    /* background-color: #393939; */
+    .progress {
+      background-color: #787878;
+    }
+  }
+}
 </style>

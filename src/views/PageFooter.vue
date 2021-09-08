@@ -1,10 +1,20 @@
 <template>
   <footer id="page-footer">
     <a href="http://beian.miit.gov.cn/" target="_blank" class="__cursor_text">
-      浙ICP备19023396号-3 &nbsp; &copy;2020 高下制图
+      {{ beianCode }} &nbsp; &copy;2020 高下制图
     </a>
   </footer>
 </template>
+
+<script>
+export default {
+  computed: {
+    beianCode() {
+      return process.env.VUE_APP_BEIAN_CODE;
+    },
+  },
+};
+</script>
 
 <style lang="scss">
 #page-footer {
