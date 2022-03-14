@@ -1,20 +1,15 @@
 <template>
   <footer id="page-footer">
-    <a href="http://beian.miit.gov.cn/" target="_blank" class="__cursor_text">
-      {{ beianCode }} &nbsp; &copy;2020 高下制图
+    <a
+      draggable="false"
+      href="#"
+      class="__cursor_text"
+      style="padding: 0 10px"
+    >
+      &nbsp; &copy;2022 WAVE
     </a>
   </footer>
 </template>
-
-<script>
-export default {
-  computed: {
-    beianCode() {
-      return process.env.VUE_APP_BEIAN_CODE;
-    },
-  },
-};
-</script>
 
 <style lang="scss">
 #page-footer {

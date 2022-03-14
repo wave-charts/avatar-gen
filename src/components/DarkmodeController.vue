@@ -15,7 +15,7 @@
     <span class="stat-icon">
       <i :class="stats.icon"></i>
     </span>
-    <span>
+    <span class="stat-label">
       {{ stats.label }}
     </span>
   </div>
@@ -108,6 +108,12 @@ export default {
 
   &:hover {
     /* background-color: rgba(0, 0, 0, 0.05); */
+  }
+
+  @media screen and(max-width: 450px) {
+    .stat-label {
+      display: none;
+    }
   }
 }
 </style>

@@ -32,6 +32,11 @@ const mouthConfig: LayerItemConfig[] = [
     weight: 10,
   },
   {
+    filename: 'QY-01',
+    genderType: GenderType.UNSET,
+    weight: 10,
+  },
+  {
     filename: 'Sad',
     genderType: GenderType.UNSET,
     weight: 10,

@@ -2,6 +2,16 @@ import { GenderType } from './../../interface/avatar.interface';
 import { LayerItemConfig } from './../../interface/layer.interface';
 const eyeBrowsConfig: LayerItemConfig[] = [
   {
+    genderType: GenderType.UNSET,
+    filename: 'dot',
+    weight: 10,
+  },
+  {
+    genderType: GenderType.UNSET,
+    filename: "Doubt",
+    weight: 10,
+  },
+  {
     genderType: GenderType.FEMAL,
     filename: "Eyelashes Down-1",
     weight: 10,
