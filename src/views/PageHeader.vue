@@ -6,7 +6,12 @@
         <DarkmodeController />
         <div id="language-selector">
           <button class="__cursor_rect">
-            <span>{{ $t("select-language") }}</span>
+            <span
+              style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
+            >
+              {{ $t("select-language") }}
+              <!-- <i class="ri-global-line" style="font-size: 0.8rem"></i> -->
+            </span>
             <i class="ri-arrow-drop-down-fill"></i>
           </button>
 

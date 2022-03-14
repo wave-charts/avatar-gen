@@ -124,7 +124,7 @@
     </div>
 
     <!-- 联系我们 -->
-    <div class="contact-us-wrapper">
+    <!-- <div class="contact-us-wrapper">
       <div
         class="contact-us __cursor_rect"
         @click="toggleWechatGroupQrCard(true)"
@@ -132,7 +132,7 @@
         <i class="ri-wechat-2-fill"></i>
         <span>{{ $t("contcat-us") }}</span>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -462,7 +462,7 @@ export default class AvatarCreator extends Mixins(AvatarCreatorMixin) {
       const description = document.createElement("div");
       const title = document.createElement("div");
       const content = document.createElement("div");
-      title.innerText = "高下制图";
+      title.innerText = "Wave";
       content.innerHTML =
         "🔧 面向未来的数据可视化分析工具。<br />💬 分享世界精彩的可视化内容。";
       title.setAttribute("style", "font-size: 1.3rem;font-weight: bold;");

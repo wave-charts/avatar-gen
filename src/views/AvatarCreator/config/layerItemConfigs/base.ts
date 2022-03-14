@@ -8,5 +8,11 @@ const baseConfig: LayerItemConfig[] = [
     weight: 10,
     avaiableColorGroups: avaiableColors[LAYER_ID.BASE],
   },
+  {
+    genderType: GenderType.UNSET,
+    filename: 'QY-02',
+    weight: 10,
+    avaiableColorGroups: avaiableColors[LAYER_ID.BASE],
+  },
 ];
 export default baseConfig;

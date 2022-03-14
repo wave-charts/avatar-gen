@@ -1,17 +1,16 @@
-import { GenderType } from "./../../interface/avatar.interface";
-import { LayerItemConfig } from "./../../interface/layer.interface";
+import { GenderType } from './../../interface/avatar.interface';
+import { LayerItemConfig } from './../../interface/layer.interface';
 const earRingConfig: LayerItemConfig[] = [
   {
     genderType: GenderType.UNSET,
-    filename: "Hoop",
+    filename: 'Hoop',
     weight: 10,
   },
 
   {
     genderType: GenderType.UNSET,
-    filename: "Stud",
+    filename: 'Stud',
     weight: 10,
-    congratulate: true,
   },
 
   {
@@ -19,5 +18,19 @@ const earRingConfig: LayerItemConfig[] = [
     empty: true,
     weight: 100,
   },
+
+  // 新年限定
+  // {
+  //   genderType: GenderType.UNSET,
+  //   filename: "Firecrackers",
+  //   weight: 10,
+  // },
+
+  // 新年限定
+  // {
+  //   genderType: GenderType.UNSET,
+  //   filename: "lanterns",
+  //   weight: 10,
+  // }
 ];
 export default earRingConfig;

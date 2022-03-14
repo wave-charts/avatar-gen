@@ -1,0 +1,14 @@
+<svg width="381" height="380" viewBox="0 0 381 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100%" height="100%" fill="{{color[0]}}" />
+<g clip-path="url(#clip0)">
+<circle cx="190.781" cy="273.807" r="253.303" fill="white" fill-opacity="0.2"/>
+<circle cx="190.783" cy="303.573" r="156.036" fill="white" fill-opacity="0.2"/>
+<circle cx="190.782" cy="279.579" r="195.199" fill="white" fill-opacity="0.2"/>
+<circle cx="190.782" cy="380" r="106.193" fill="white" fill-opacity="0.2"/>
+</g>
+<defs>
+<clipPath id="clip0">
+<rect width="380" height="380" fill="white" transform="translate(0.78125)"/>
+</clipPath>
+</defs>
+</svg>

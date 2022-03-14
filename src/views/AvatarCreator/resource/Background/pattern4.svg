@@ -1,0 +1,12 @@
+<svg width="381" height="380" viewBox="0 0 381 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100%" height="100%" fill="{{color[0]}}" />
+<g clip-path="url(#clip0)">
+<rect x="-18.0098" y="299.344" width="405.054" height="95" fill="white" fill-opacity="0.3"/>
+<rect x="0.78125" y="95" width="405.054" height="95" fill="white" fill-opacity="0.3"/>
+</g>
+<defs>
+<clipPath id="clip0">
+<rect width="380" height="380" fill="white" transform="translate(0.78125)"/>
+</clipPath>
+</defs>
+</svg>

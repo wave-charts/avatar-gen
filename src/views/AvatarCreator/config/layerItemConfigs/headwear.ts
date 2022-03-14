@@ -7,6 +7,14 @@ const headwearConfig: LayerItemConfig[] = [
     weight: 30,
     genderType: GenderType.UNSET,
   },
+
+  // 牛年限定
+  // {
+  //   filename: "cowHorn",
+  //   weight: 2,
+  //   genderType: GenderType.UNSET,
+  //   congratulate: true,
+  // },
 ];
 
 export default headwearConfig;
