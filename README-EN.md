@@ -8,7 +8,7 @@
 
 A web platform to create random avatar,
 
-Live demo: [https://avatar.gaoxiazhitu.com](https://avatar.gaoxiazhitu.com)
+Live demo: [https://avatar.waveapp.cn](https://avatar.waveapp.cn)
 
 Preview: 
 
